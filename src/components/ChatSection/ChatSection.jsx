@@ -7,6 +7,7 @@ import user from "../../assets/user.png";
 import ai from "../../assets/ai.png";
 
 
+
 function chatSection() {
 
 let {send, input, setInput, showResult, resultData, recentPrompt, loading}=useContext(dataContext)
@@ -22,7 +23,7 @@ let {send, input, setInput, showResult, resultData, recentPrompt, loading}=useCo
   <div className="userbox">
     <img src={user} alt="" width={"50 px"} />
     <p>{recentPrompt}</p>
-  </div>
+  </div>                                                     
   <div className="aibox">
     <img src={ai} alt="" width={"40px"} />
     {loading?<div className="loader">
@@ -37,10 +38,27 @@ let {send, input, setInput, showResult, resultData, recentPrompt, loading}=useCo
 
     </div>
     <div className="bottomsection">
-<input onChange={(e)=>setInput(e.target.value)} type="text" placeholder="Ask anything" value={input}/>
-<button id="sendbtn"onClick={()=> {
+
+<input 
+  onChange={(e) => setInput(e.target.value)} 
+  onKeyDown={(e) => {
+    if (e.key === "Enter" && !e.shiftKey && input.trim() !== "") {
+      e.preventDefault(); // prevent line break
+      send(input);
+    }
+  }}
+  type="text" 
+  placeholder="Ask anything" 
+  value={input}
+/>
+
+
+
+
+{input?<button id="sendbtn"onClick={()=> {
   send(input)
-}}><IoSendSharp /></button>
+}}><IoSendSharp /></button>:null}
+
 <Darkmode/>
     </div>
     </div>

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import React,{useState} from 'react';
 import { ImSun } from "react-icons/im";
 import "./Darkmode.css";
+import { BsMoonStars } from "react-icons/bs";
 
 function Darkmode() {
     const [mode, setMode]= useState("darkmode");
@@ -20,7 +21,7 @@ function Darkmode() {
     <button className="darkmodebtn" onClick={() =>{
         toggle()
         console.log(mode);
-    }}><ImSun />
+    }}>{mode === "darkmode"?<ImSun />:<BsMoonStars />}
 </button>
   )
 }
